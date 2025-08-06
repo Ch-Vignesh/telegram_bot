@@ -1,109 +1,3 @@
-# version 2
-
-# import time
-# import requests
-# import google.generativeai as genai
-# import os
-# import pymongo
-# from datetime import datetime
-# from dotenv import load_dotenv
-# load_dotenv()
-
-
-# # Setup
-# BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-# GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-# MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
-
-# BASE_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
-# genai.configure(api_key=GEMINI_API_KEY)
-# model = genai.GenerativeModel('gemini-2.5-flash-lite')
-
-# # MongoDB setup
-# try:
-#     mongo_client = pymongo.MongoClient(MONGODB_URI, serverSelectionTimeoutMS=2000)
-#     mongo_client.server_info()  # Test connection
-#     db = mongo_client["mental_health_bot"]
-#     conversations = db["conversations"]
-#     db_connected = True
-# except Exception as e:
-#     print("MongoDB connection failed:", e)
-#     db_connected = False
-
-# last_update_id = 0
-
-# def get_updates():
-#     global last_update_id
-#     response = requests.get(f"{BASE_URL}/getUpdates?offset={last_update_id + 1}")
-#     return response.json()
-
-# def send_reply(chat_id, text):
-#     requests.post(f"{BASE_URL}/sendMessage", json={
-#         "chat_id": chat_id,
-#         "text": text
-#     })
-
-# while True:
-#     updates = get_updates()
-#     if 'result' in updates:
-#         for update in updates['result']:
-#             last_update_id = update['update_id']
-#             msg = update['message']['text']
-#             chat_id = update['message']['chat']['id']
-#             user = update['message']['from']
-#             user_id = user.get("id")
-#             username = user.get("username")
-            
-#             print(f"User: {msg}")
-#             try:
-#                 prompt = f"""
-#                 You are a multilingual AI mental health companion designed to support users with empathy, clarity, and psychological guidance.
-#                 Your role:
-#                 - Act as a friendly, supportive, non-judgmental therapist trained in CBT (Cognitive Behavioral Therapy) and culturally sensitive care.
-#                 - Use simple, compassionate language to help users understand and manage emotional challenges.
-#                 - if the user messages in their languages you have to reply in their language with english words example : if the user says 'naaku health baaledu' - telugu , you should reply in telugu with english text like 'ayyo avuna jaagratha' .
-#                 - Respond based on both the current message and the user's emotional history (if memory summary is available).
-#                 - Offer gentle nudges toward mental well-being through interactive suggestions like mood-check-ins, self-reflection questions, breathing exercises, games, or helpful resources.
-#                 - If the user appears in distress or mentions suicidal thoughts, record the conversation and escalate internally. Do not panic the user — instead, offer comforting words and subtly suggest talking to a human therapist.
-#                 - When the user requests their progress report or mood history, summarize their emotional trajectory based on past conversations (if available), and offer insights or encouragement.
-
-#                 Constraints:
-#                 - Never break character. You are always warm, calm, and professionally supportive.
-#                 - If memory, reports, or data from previous sessions are missing (e.g., database or summary not available), acknowledge it politely and continue the conversation without interruption.
-#                 - Always prioritize clarity, emotional safety, and helpfulness. Never guess or assume medical facts. Avoid technical jargon.
-
-#                 Respond to the following message with this mindset: {msg}
-#                 """
-
-#                 response = model.generate_content(prompt).text
-#                 print("==========")
-
-#             except Exception as e:
-#                 response = "Sorry, I'm having trouble responding right now. Please try again later."
-#                 print("Gemini Error:", e)
-
-#             send_reply(chat_id, response)
-#             print("_________________________")
-#             print(f"Response: {response}")
-
-#             # Save to MongoDB if available
-#             if db_connected:
-#                 try:
-#                     conversations.insert_one({
-#                         "user_id": user_id,
-#                         "username": username,
-#                         "message": msg,
-#                         "response": response,
-#                         "timestamp": datetime.now(),
-#                         "language": update['message'].get('language_code', 'unknown')
-#                     })
-#                 except Exception as e:
-#                     print("Failed to store conversation:", e)
-#     time.sleep(2)
-
-
-# version 3
-
 import os
 import asyncio
 from fastapi import FastAPI
@@ -119,7 +13,7 @@ load_dotenv()
 # Configuration
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-MONGODB_URI = os.getenv("MONGODB_URI", "mongodb+srv://vigneshchinthakuntla:<rmzAnGCi8Q2iVVlU>@telegram-test.e9mar2e.mongodb.net/?retryWrites=true&w=majority&appName=telegram-test")
+MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://vigneshchinthakuntla:<rmzAnGCi8Q2iVVlU>@telegram-test-shard-00-00.e9mar2e.mongodb.net:27017,telegram-test-shard-00-01.e9mar2e.mongodb.net:27017,telegram-test-shard-00-02.e9mar2e.mongodb.net:27017/?ssl=true&replicaSet=atlas-xxxxx-shard-0&authSource=admin&retryWrites=true&w=majority")
 
 app = FastAPI()
 
