@@ -26,8 +26,8 @@ pyparsing==3.2.3
 python-dotenv==1.1.1
 requests==2.32.4
 rsa==4.9.1
-motor==3.3.1
-pymongo==3.12.3
+motor
+pymongo
 tqdm==4.67.1
 typing-inspection==0.4.1
 typing_extensions==4.14.1
@@ -35,4 +35,5 @@ uritemplate==4.2.0
 urllib3==2.5.0
 fastapi==0.111.0
 uvicorn==0.30.1
+
 
