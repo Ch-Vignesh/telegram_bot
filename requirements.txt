@@ -28,7 +28,7 @@ requests==2.32.4
 rsa==4.9.1
 motor
 pymongo
-pymongo[srv]==3.12
+pymongo[srv]
 tqdm==4.67.1
 typing-inspection==0.4.1
 typing_extensions==4.14.1
@@ -36,6 +36,7 @@ uritemplate==4.2.0
 urllib3==2.5.0
 fastapi==0.111.0
 uvicorn==0.30.1
+
 
 
 
