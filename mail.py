@@ -14,10 +14,7 @@ load_dotenv()
 # Configuration
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-MONGODB_URI = os.getenv(
-    "MONGODB_URI",
-    "mongodb+srv://vigneshchinthakuntla:<db_password>@telegram-test.e9mar2e.mongodb.net/?retryWrites=true&w=majority&appName=telegram-test"
-)
+MONGODB_URI = os.getenv("MONGODB_URI","mongodb+srv://vigneshchinthakuntla:rmzAnGCi8Q2iVVlU@telegram-test.e9mar2e.mongodb.net/?retryWrites=true&w=majority&appName=telegram-test")
 
 app = FastAPI()
 
