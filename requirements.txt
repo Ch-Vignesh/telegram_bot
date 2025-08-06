@@ -3,7 +3,7 @@ cachetools==5.5.2
 certifi==2025.8.3
 charset-normalizer==3.4.2
 colorama==0.4.6
-dnspython==2.7.0
+dnspython
 google-ai-generativelanguage==0.6.15
 google-api-core==2.25.1
 google-api-python-client==2.177.0
@@ -36,6 +36,7 @@ uritemplate==4.2.0
 urllib3==2.5.0
 fastapi==0.111.0
 uvicorn==0.30.1
+
 
 
 
